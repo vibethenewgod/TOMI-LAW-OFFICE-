@@ -86,28 +86,30 @@ export default function HeroCarousel() {
 
           {/* Content - Left aligned */}
           <div className="absolute inset-0 z-20 flex items-center">
-            <div className="container mx-auto px-6 md:px-12 lg:px-20 max-w-2xl">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-4 leading-tight">
-                {slide.title}
-              </h1>
-              <p className="text-lg md:text-xl text-white/95 mb-6 leading-relaxed font-light">
-                {slide.longDescription}
-              </p>
-              <div className="flex flex-wrap gap-4 pt-4">
-                {slide.buttons.map((button, btnIndex) => (
-                  <Link
-                    key={btnIndex}
-                    href={button.href}
-                    className={cn(
-                      "px-6 py-3 rounded-full font-medium transition-all duration-300 text-sm md:text-base",
-                      button.primary
-                        ? "bg-[#0099D8] text-white hover:bg-[#007BAD]"
-                        : "border border-white text-white hover:bg-white hover:text-black"
-                    )}
-                  >
-                    {button.text}
-                  </Link>
-                ))}
+            <div className="container mx-auto px-6 md:px-12 lg:px-0 max-w-2xl">
+              <div className="ml-0 md:ml-8 lg:ml-20">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-4 leading-tight">
+                  {slide.title}
+                </h1>
+                <p className="text-lg md:text-xl text-white/95 mb-6 leading-relaxed font-light">
+                  {slide.longDescription}
+                </p>
+                <div className="flex flex-wrap gap-4 pt-4">
+                  {slide.buttons.map((button, btnIndex) => (
+                    <Link
+                      key={btnIndex}
+                      href={button.href}
+                      className={cn(
+                        "px-6 py-3 rounded-full font-medium transition-all duration-300 text-sm md:text-base",
+                        button.primary
+                          ? "bg-[#0099D8] text-white hover:bg-[#007BAD]"
+                          : "border border-white text-white hover:bg-white hover:text-black"
+                      )}
+                    >
+                      {button.text}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
