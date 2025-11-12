@@ -44,14 +44,14 @@ export default function HeroCarousel() {
     if (isTransitioning) return
     setIsTransitioning(true)
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
-    setTimeout(() => setIsTransitioning(false), 1000)
+    setTimeout(() => setIsTransitioning(false), 700)
   }, [isTransitioning])
 
   const prevSlide = useCallback(() => {
     if (isTransitioning) return
     setIsTransitioning(true)
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
-    setTimeout(() => setIsTransitioning(false), 1000)
+    setTimeout(() => setIsTransitioning(false), 700)
   }, [isTransitioning])
 
   useEffect(() => {
@@ -68,8 +68,8 @@ export default function HeroCarousel() {
         <div
           key={index}
           className={cn(
-            "absolute inset-0 w-full h-full transition-transform duration-1000 ease-in-out",
-            currentSlide === index ? "translate-x-0 z-10" : "translate-x-full z-0",
+            "absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out",
+            currentSlide === index ? "opacity-100 z-10" : "opacity-0 z-0",
           )}
         >
           {/* Image with overlay */}
@@ -87,10 +87,10 @@ export default function HeroCarousel() {
           {/* Content - Left aligned */}
           <div className="absolute inset-0 z-20 flex items-center">
               <div className="pl-6 md:pl-12 lg:pl-32">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-4 leading-tight max-w-2xl">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-8 leading-tight max-w-2xl">
                   {slide.title}
                 </h1>
-                <p className="text-lg md:text-xl text-white/95 mb-6 leading-relaxed font-light max-w-2xl">
+                <p className="text-lg md:text-xl text-white/95 mb-10 leading-relaxed font-light max-w-2xl">
                   {slide.longDescription}
                 </p>
                 <div className="flex flex-wrap gap-4 pt-4">
@@ -139,7 +139,7 @@ export default function HeroCarousel() {
               if (!isTransitioning) {
                 setIsTransitioning(true)
                 setCurrentSlide(index)
-                setTimeout(() => setIsTransitioning(false), 1000)
+                setTimeout(() => setIsTransitioning(false), 700)
               }
             }}
             className={cn(
