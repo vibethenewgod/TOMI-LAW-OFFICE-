@@ -27,21 +27,7 @@ const NavItem = ({ title, href = "#", hasDropdown = false, isActive = false }) =
         <span>{title}</span>
         {hasDropdown && <ChevronDown className="ml-1 h-4 w-4" />}
       </Link>
-      {hasDropdown && (
-        <div className="absolute left-0 mt-0 w-48 bg-white shadow-lg hidden group-hover:block z-50">
-          <div className="py-1">
-            <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-normal">
-              Submenu Item 1
-            </Link>
-            <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-normal">
-              Submenu Item 2
-            </Link>
-            <Link href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 font-normal">
-              Submenu Item 3
-            </Link>
-          </div>
-        </div>
-      )}
+
     </div>
   )
 }
@@ -64,8 +50,8 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
             <NavItem title="Home" href="/" />
-            <NavItem title="About Us" hasDropdown={true} />
-            <NavItem title="Practice Areas" hasDropdown={true} />
+            <NavItem title="About Us" hasDropdown={false} />
+            <NavItem title="Practice Areas" hasDropdown={false} />
 
             <div className="mx-6 h-4 border-l border-gray-500"></div>
 
