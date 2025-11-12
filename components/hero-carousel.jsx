@@ -86,12 +86,11 @@ export default function HeroCarousel() {
 
           {/* Content - Left aligned */}
           <div className="absolute inset-0 z-20 flex items-center">
-            <div className="container mx-auto px-6 md:px-12 lg:px-0 max-w-2xl">
-              <div className="ml-0 md:ml-8 lg:ml-20">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-4 leading-tight">
+              <div className="pl-6 md:pl-12 lg:pl-32">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-4 leading-tight max-w-2xl">
                   {slide.title}
                 </h1>
-                <p className="text-lg md:text-xl text-white/95 mb-6 leading-relaxed font-light">
+                <p className="text-lg md:text-xl text-white/95 mb-6 leading-relaxed font-light max-w-2xl">
                   {slide.longDescription}
                 </p>
                 <div className="flex flex-wrap gap-4 pt-4">
@@ -110,7 +109,6 @@ export default function HeroCarousel() {
                     </Link>
                   ))}
                 </div>
-              </div>
             </div>
           </div>
         </div>
