@@ -45,36 +45,37 @@ export default function InsightsSection() {
         {/* Insights Grid - image left, content right on desktop */}
         <div className="grid grid-cols-1 gap-10">
           {insights.map((insight) => (
-            <article
+            <Link
               key={insight.id}
-              className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8"
+              href={insight.link}
+              className="group block"
+              aria-label={`Read article: ${insight.title}`}
             >
-              <div className="flex-shrink-0 w-full md:w-56 h-56 rounded overflow-hidden bg-gray-100">
-                <Image
-                  src={insight.image}
-                  alt={insight.title}
-                  fill
-                  className="object-cover transition-transform duration-300 hover:scale-105"
-                />
-              </div>
+              <article className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8 hover:bg-gray-50 p-4 rounded">
+                <div className="flex-shrink-0 w-full md:w-56 h-56 rounded overflow-hidden bg-gray-100">
+                  <Image
+                    src={insight.image}
+                    alt={insight.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </div>
 
-              <div className="flex-1">
-                <p className="text-sm text-gray-500 mb-2">{insight.date}</p>
-                <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3 leading-tight">
-                  {insight.title}
-                </h3>
-                <p className="text-gray-700 text-sm md:text-base mb-4">
-                  {insight.description}
-                </p>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-500 mb-2">{insight.date}</p>
+                  <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3 leading-tight">
+                    {insight.title}
+                  </h3>
+                  <p className="text-gray-700 text-sm md:text-base mb-4">
+                    {insight.description}
+                  </p>
 
-                <Link
-                  href={insight.link}
-                  className="inline-block text-[#0099D8] font-medium hover:text-[#007BAD] border-b border-transparent hover:border-[#0099D8] pb-1"
-                >
-                  Read more <span className="text-base">›</span>
-                </Link>
-              </div>
-            </article>
+                  <span className="inline-block text-[#0099D8] font-medium hover:text-[#007BAD] border-b border-transparent group-hover:border-[#0099D8] pb-1">
+                    Read more <span className="text-base">›</span>
+                  </span>
+                </div>
+              </article>
+            </Link>
           ))}
         </div>
 
