@@ -36,7 +36,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="w-full fixed top-0 left-0 right-0 z-50 bg-[#002548]/80 backdrop-blur-md border-b border-white/10">
+    <header className="w-full bg-[#002548]">
       <div className="container mx-auto">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -77,7 +77,7 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-[#002548]/95 backdrop-blur-md border-t border-white/10">
+        <div className="lg:hidden bg-[#002548] border-t border-gray-700">
           <div className="container mx-auto py-2">
             <nav className="flex flex-col space-y-2">
               <NavItem title="Home" href="/" />
@@ -92,3 +92,4 @@ export default function Navbar() {
     </header>
   )
 }
+
