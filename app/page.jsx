@@ -4,6 +4,7 @@ import FeaturedContent from "@/components/featured-content"
 import AboutSection from "@/components/about-section"
 import CommitmentSection from "@/components/commitment-section"
 import InsightsSection from "@/components/insights-section"
+import CTASection from "@/components/cta-section"
 import ContactSection from "@/components/contact-section"
 import Footer from "@/components/footer"
 
@@ -17,6 +18,7 @@ export default function Home() {
       <CommitmentSection />
       <AboutSection />
       <InsightsSection />
+      <CTASection />
       {/* <FeaturedContent /> */}
       <ContactSection />
       <Footer />
