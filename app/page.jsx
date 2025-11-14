@@ -11,16 +11,14 @@ import Footer from "@/components/footer"
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <div className="bg-[#002548]">
-        <Navbar />
-      </div>
+      <Navbar />
       <HeroCarousel />
       <CommitmentSection />
       <AboutSection />
       <InsightsSection />
       <CTASection />
       {/* <FeaturedContent /> */}
-      <ContactSection />
+      {/* <ContactSection /> */}
       <Footer />
     </main>
   )
