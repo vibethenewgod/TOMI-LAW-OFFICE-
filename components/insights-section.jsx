@@ -1,8 +1,22 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
+import { useState, useEffect, useRef } from "react"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 export default function InsightsSection() {
-  // Canada-focused sample articles — replace image paths with your assets
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isMobile, setIsMobile] = useState(false)
+  const containerRef = useRef(null)
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
   const insights = [
     {
       id: 1,
@@ -11,7 +25,7 @@ export default function InsightsSection() {
       title: "Updates to Saskatchewan Real Estate Rules: What Buyers Should Know",
       description:
         "A summary of recent regulatory changes affecting property transactions in Saskatchewan and practical tips for buyers and sellers.",
-      link: "#"
+      link: "#",
     },
     {
       id: 2,
@@ -20,7 +34,7 @@ export default function InsightsSection() {
       title: "Estate Planning in Canada: New Considerations for 2025",
       description:
         "Key updates to estate planning practice across Canada and how they may affect wills, powers of attorney, and probate timelines.",
-      link: "#"
+      link: "#",
     },
     {
       id: 3,
@@ -29,9 +43,66 @@ export default function InsightsSection() {
       title: "Employment Law: Recent Case Law in Canadian Courts",
       description:
         "Highlights from recent decisions that impact employment agreements, termination, and workplace policies in Canada.",
-      link: "#"
-    }
+      link: "#",
+    },
+    {
+      id: 4,
+      image: "/images/insight-canada-4.jpg",
+      date: "November 4, 2025",
+      title: "Immigration Updates: Changes to Canada's Work Permit Programs",
+      description:
+        "A look at the latest immigration policy adjustments affecting temporary foreign workers and employer compliance requirements.",
+      link: "#",
+    },
+    {
+      id: 5,
+      image: "/images/insight-canada-5.jpg",
+      date: "November 9, 2025",
+      title: "Corporate Governance: Strengthening Compliance Frameworks",
+      description:
+        "Practical guidance for Canadian corporations on adapting to new transparency and reporting obligations under federal law.",
+      link: "#",
+    },
+    {
+      id: 6,
+      image: "/images/insight-canada-6.jpg",
+      date: "November 13, 2025",
+      title: "Real Estate Trends: Navigating Development Regulations",
+      description:
+        "Insights into municipal planning updates, zoning restrictions, and how developers can prepare for 2026 regulatory shifts.",
+      link: "#",
+    },
+    {
+      id: 7,
+      image: "/images/insight-canada-7.jpg",
+      date: "November 10, 2025",
+      title: "Tax Updates: How New Rules Affect Canadian Businesses",
+      description:
+        "An overview of fiscal changes impacting corporate tax obligations and financial reporting for small and large enterprises.",
+      link: "#",
+    },
+    {
+      id: 8,
+      image: "/images/insight-canada-8.jpg",
+      date: "November 12, 2025",
+      title: "Family Law: Key Developments in Child Custody and Support",
+      description:
+        "Recent family court rulings and legislative changes shaping custody arrangements across Canadian provinces.",
+      link: "#",
+    },
   ]
+
+  const next = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: 300, behavior: "smooth" })
+    }
+  }
+
+  const prev = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: -300, behavior: "smooth" })
+    }
+  }
 
   return (
     <section className="py-16 md:py-24 bg-white">
@@ -42,17 +113,19 @@ export default function InsightsSection() {
           <div className="w-24 h-1 bg-[#0099D8] mx-auto"></div>
         </div>
 
-        {/* Insights Grid - image left, content right on desktop */}
-        <div className="grid grid-cols-1 gap-10">
-          {insights.map((insight) => (
-            <Link
-              key={insight.id}
-              href={insight.link}
-              className="group block"
-              aria-label={`Read article: ${insight.title}`}
-            >
-              <article className="flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-8 hover:bg-gray-50 p-4 rounded">
-                <div className="flex-shrink-0 w-full md:w-56 h-56 rounded overflow-hidden bg-gray-100">
+        {/* Carousel */}
+        <div className="relative">
+          <div
+            ref={containerRef}
+            className="flex overflow-x-auto gap-6 snap-x snap-mandatory scrollbar-hide scroll-smooth"
+          >
+            {insights.map((insight) => (
+              <Link
+                key={insight.id}
+                href={insight.link}
+                className="snap-center flex-shrink-0 w-[85%] sm:w-[45%] md:w-[30%] lg:w-[28%] bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden group"
+              >
+                <div className="relative w-full h-40 md:h-44">
                   <Image
                     src={insight.image}
                     alt={insight.title}
@@ -60,27 +133,43 @@ export default function InsightsSection() {
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-
-                <div className="flex-1">
-                  <p className="text-sm text-gray-500 mb-2">{insight.date}</p>
-                  <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3 leading-tight">
+                <div className="p-4 flex flex-col h-full">
+                  <p className="text-xs font-semibold text-[#0099D8] mb-1 uppercase">{insight.date}</p>
+                  <h3 className="text-sm md:text-base font-semibold text-gray-900 mb-2 group-hover:text-[#0099D8] transition-colors">
                     {insight.title}
                   </h3>
-                  <p className="text-gray-700 text-sm md:text-base mb-4">
+                  <p className="text-gray-600 text-xs md:text-sm mb-3 line-clamp-3">
                     {insight.description}
                   </p>
-
-                  <span className="inline-block text-[#0099D8] font-medium hover:text-[#007BAD] border-b border-transparent group-hover:border-[#0099D8] pb-1">
-                    Read more <span className="text-base">›</span>
+                  <span className="text-[#0099D8] text-sm font-semibold flex items-center gap-1 mt-auto">
+                    Read more <ChevronRight className="w-3 h-3" />
                   </span>
                 </div>
-              </article>
-            </Link>
-          ))}
+              </Link>
+            ))}
+          </div>
+
+          {/* Buttons */}
+          <button
+            onClick={prev}
+            className={`absolute left-2 md:left-4 ${
+              isMobile ? "bottom-[-40px]" : "top-1/2 -translate-y-1/2"
+            } bg-white/90 p-2 rounded-full shadow-md hover:scale-110 transition`}
+          >
+            <ChevronLeft className="text-[#0099D8]" strokeWidth={3} />
+          </button>
+          <button
+            onClick={next}
+            className={`absolute right-2 md:right-4 ${
+              isMobile ? "bottom-[-40px]" : "top-1/2 -translate-y-1/2"
+            } bg-white/90 p-2 rounded-full shadow-md hover:scale-110 transition`}
+          >
+            <ChevronRight className="text-[#0099D8]" strokeWidth={3} />
+          </button>
         </div>
 
         {/* CTA Button */}
-        <div className="flex justify-center pt-10">
+        <div className="flex justify-center pt-16">
           <Link
             href="#"
             className="inline-flex items-center gap-3 text-sm md:text-base font-medium text-gray-800 hover:text-[#0099D8] border-t border-gray-200 pt-6"
