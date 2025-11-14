@@ -2,20 +2,23 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useState, useEffect, useRef } from "react"
+import { useRef } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 export default function InsightsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isMobile, setIsMobile] = useState(false)
   const containerRef = useRef(null)
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768)
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
+  const next = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: 300, behavior: "smooth" })
+    }
+  }
+
+  const prev = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({ left: -300, behavior: "smooth" })
+    }
+  }
 
   const insights = [
     {
@@ -92,21 +95,10 @@ export default function InsightsSection() {
     },
   ]
 
-  const next = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollBy({ left: 300, behavior: "smooth" })
-    }
-  }
-
-  const prev = () => {
-    if (containerRef.current) {
-      containerRef.current.scrollBy({ left: -300, behavior: "smooth" })
-    }
-  }
-
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 md:px-8 lg:px-12">
+
         {/* Section Title */}
         <div className="mb-12 text-center">
           <h2 className="text-4xl md:text-5xl font-serif text-[#0099D8] mb-3">Latest Insights</h2>
@@ -133,14 +125,18 @@ export default function InsightsSection() {
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
+
                 <div className="p-4 flex flex-col h-full">
                   <p className="text-xs font-semibold text-[#0099D8] mb-1 uppercase">{insight.date}</p>
+
                   <h3 className="text-sm md:text-base font-semibold text-gray-900 mb-2 group-hover:text-[#0099D8] transition-colors">
                     {insight.title}
                   </h3>
+
                   <p className="text-gray-600 text-xs md:text-sm mb-3 line-clamp-3">
                     {insight.description}
                   </p>
+
                   <span className="text-[#0099D8] text-sm font-semibold flex items-center gap-1 mt-auto">
                     Read more <ChevronRight className="w-3 h-3" />
                   </span>
@@ -149,20 +145,17 @@ export default function InsightsSection() {
             ))}
           </div>
 
-          {/* Buttons */}
+          {/* Navigation Buttons */}
           <button
             onClick={prev}
-            className={`absolute left-2 md:left-4 ${
-              isMobile ? "bottom-[-40px]" : "top-1/2 -translate-y-1/2"
-            } bg-white/90 p-2 rounded-full shadow-md hover:scale-110 transition`}
+            className="absolute left-2 md:left-4 bottom-[-60px] md:bottom-auto md:top-1/2 md:-translate-y-1/2 bg-white/90 p-2 rounded-full shadow-md hover:scale-110 transition"
           >
             <ChevronLeft className="text-[#0099D8]" strokeWidth={3} />
           </button>
+
           <button
             onClick={next}
-            className={`absolute right-2 md:right-4 ${
-              isMobile ? "bottom-[-40px]" : "top-1/2 -translate-y-1/2"
-            } bg-white/90 p-2 rounded-full shadow-md hover:scale-110 transition`}
+            className="absolute right-2 md:right-4 bottom-[-60px] md:bottom-auto md:top-1/2 md:-translate-y-1/2 bg-white/90 p-2 rounded-full shadow-md hover:scale-110 transition"
           >
             <ChevronRight className="text-[#0099D8]" strokeWidth={3} />
           </button>
