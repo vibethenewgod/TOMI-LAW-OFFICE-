@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Menu, Phone } from "lucide-react"
+import { ChevronDown, Search, Menu } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 /**
@@ -11,22 +11,23 @@ import { cn } from "@/lib/utils"
  * @param {Object} props
  * @param {string} props.title - The title of the navigation item
  * @param {string} [props.href="#"] - The link URL
+ * @param {boolean} [props.hasDropdown=false] - Whether the item has a dropdown
  * @param {boolean} [props.isActive=false] - Whether the item is active
- * @param {string} [props.className] - Additional classes for styling
  */
-const NavItem = ({ title, href = "#", isActive = false, className }) => {
+const NavItem = ({ title, href = "#", hasDropdown = false, isActive = false }) => {
   return (
-    <div className="relative">
+    <div className="relative group">
       <Link
         href={href}
         className={cn(
-          "flex items-center px-3 py-2 text-sm font-medium text-white hover:text-gray-100 transition-colors",
+          "flex items-center px-3 py-2 text-white hover:text-gray-200 transition-colors text-sm font-normal",
           isActive && "text-white",
-          className,
         )}
       >
         <span>{title}</span>
+        {hasDropdown && <ChevronDown className="ml-1 h-4 w-4" />}
       </Link>
+
     </div>
   )
 }
@@ -35,76 +36,55 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <header className="w-full sticky top-0 z-50">
-      {/* Top contact bar */}
-      <div className="w-full bg-gray-900 text-gray-100 text-xs md:text-sm">
-        <div className="container mx-auto h-10 flex items-center justify-between px-4">
-          <span className="hidden md:inline">24 x 7 Assistance</span>
-          <div className="ml-auto flex items-center gap-4">
-            <Link href="tel:13068734521" className="flex items-center gap-2 hover:text-white">
-              <Phone className="h-4 w-4" />
-              <span className="hidden sm:inline">Tisdale:</span>
-              <span>306-873-4521</span>
-            </Link>
-            <span className="hidden md:inline text-gray-500">|</span>
-            <Link href="tel:13068624511" className="flex items-center gap-2 hover:text-white">
-              <Phone className="h-4 w-4" />
-              <span className="hidden sm:inline">Nipawin:</span>
-              <span>306-862-4511</span>
+    <header className="w-full bg-[#002548]">
+      <div className="container mx-auto">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link href="/" className="flex items-center">
+              <Image src="/images/logo.png" alt="Tomi Law Office Logo" width={50} height={50} />
+              <div className="text-white text-xl md:text-2xl font-normal tracking-wider ml-2">TOMI LAW OFFICE</div>
             </Link>
           </div>
-        </div>
-      </div>
 
-      {/* Main navigation */}
-      <div className="w-full bg-gradient-to-r from-[#001b33] to-[#002548] shadow-sm">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-between h-20 px-4">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-              <Link href="/" className="flex items-center">
-                <Image src="/images/logo.png" alt="Tomi Law Office Logo" width={50} height={50} />
-                <div className="text-white text-xl md:text-2xl font-semibold tracking-wide ml-2">
-                  TOMI LAW OFFICE
-                </div>
-              </Link>
-            </div>
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-1">
+            <NavItem title="Home" href="/" />
+            <NavItem title="About Us" hasDropdown={false} />
+            <NavItem title="Practice Areas" hasDropdown={false} />
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center">
-              <div className="flex items-center">
-                <NavItem title="Home" href="/" />
-                <NavItem title="About Us" href="#" />
-                <NavItem title="Practice Areas" href="#" />
-                <NavItem title="Our Team" href="#" />
-                <NavItem title="Contact" href="#" />
-              </div>
-            </nav>
+            <div className="mx-6 h-4 border-l border-gray-500"></div>
 
-            {/* Mobile menu button */}
-            <div className="lg:hidden flex items-center">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 text-white"
-                aria-label="Toggle menu"
-              >
-                <Menu className="h-7 w-7" />
-              </button>
-            </div>
+            <NavItem title="Our Team" />
+            <NavItem title="Contact" />
+
+            <button className="ml-2 p-2 text-white hover:text-gray-200">
+              <Search className="h-5 w-5" />
+            </button>
+          </nav>
+
+          {/* Mobile menu button - Only hamburger icon */}
+          <div className="lg:hidden flex items-center space-x-4">
+            <button className="text-white">
+              <Search className="h-5 w-5" />
+            </button>
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white p-2" aria-label="Toggle menu">
+              <Menu className="h-6 w-6" />
+            </button>
           </div>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-gradient-to-b from-[#001b33] to-[#002548] border-t border-gray-800">
-          <div className="container mx-auto px-4 py-3">
-            <nav className="flex flex-col space-y-1">
-              <NavItem title="Home" href="/" className="px-0 py-2" />
-              <NavItem title="About Us" href="#" className="px-0 py-2" />
-              <NavItem title="Practice Areas" href="#" className="px-0 py-2" />
-              <NavItem title="Our Team" href="#" className="px-0 py-2" />
-              <NavItem title="Contact" href="#" className="px-0 py-2" />
+        <div className="lg:hidden bg-[#002548] border-t border-gray-700">
+          <div className="container mx-auto py-2">
+            <nav className="flex flex-col space-y-2">
+              <NavItem title="Home" href="/" />
+              <NavItem title="About Us" />
+              <NavItem title="Practice Areas" />
+              <NavItem title="Our Team" />
+              <NavItem title="Contact" />
             </nav>
           </div>
         </div>
