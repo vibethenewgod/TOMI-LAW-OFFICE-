@@ -26,7 +26,7 @@ const slides = [
     ]
   },
   {
-    image: "/images/hero-3.jpg",
+    image: "/images/hero-3.jpeg",
     title: "Experience. Dedication. Results.",
     description: "Comprehensive Legal Services Across Saskatchewan",
     longDescription: "Tomi Law Office offers comprehensive legal services across Family, Corporate, Real Estate, and Estate Law. With offices in Tisdale and Nipawin, we stand by individuals, businesses, and communities—every step of the way.",
@@ -62,7 +62,7 @@ export default function HeroCarousel() {
   }, [nextSlide])
 
   return (
-    <div className="relative w-full h-[80vh] overflow-hidden bg-black">
+    <div className="relative w-full h-[75vh] md:h-screen overflow-hidden bg-black">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
