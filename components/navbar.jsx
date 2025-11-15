@@ -20,8 +20,8 @@ const NavItem = ({ title, href = "#", isActive = false, className }) => {
       <Link
         href={href}
         className={cn(
-          "flex items-center px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors",
-          isActive && "text-gray-900",
+          "flex items-center px-3 py-2 text-sm font-medium text-white hover:text-gray-100 transition-colors",
+          isActive && "text-white",
           className,
         )}
       >
@@ -57,14 +57,14 @@ export default function Navbar() {
       </div>
 
       {/* Main navigation */}
-      <div className="w-full bg-white shadow-sm">
+      <div className="w-full bg-gradient-to-r from-[#001b33] to-[#002548] shadow-sm">
         <div className="container mx-auto">
           <div className="flex items-center justify-between h-20 px-4">
             {/* Logo */}
             <div className="flex-shrink-0">
               <Link href="/" className="flex items-center">
                 <Image src="/images/logo.png" alt="Tomi Law Office Logo" width={50} height={50} />
-                <div className="text-gray-900 text-xl md:text-2xl font-semibold tracking-wide ml-2">
+                <div className="text-white text-xl md:text-2xl font-semibold tracking-wide ml-2">
                   TOMI LAW OFFICE
                 </div>
               </Link>
@@ -74,27 +74,18 @@ export default function Navbar() {
             <nav className="hidden lg:flex items-center">
               <div className="flex items-center">
                 <NavItem title="Home" href="/" />
-                <NavItem title="Practice Areas" href="#practice-areas" />
-                <NavItem title="Attorney" href="#attorney" />
-                <NavItem title="Success Cases" href="#success-cases" />
-                <NavItem title="Locations" href="#locations" />
+                <NavItem title="About Us" href="#" />
+                <NavItem title="Practice Areas" href="#" />
+                <NavItem title="Our Team" href="#" />
+                <NavItem title="Contact" href="#" />
               </div>
-
-              <div className="mx-6 h-5 border-l border-gray-300" />
-
-              <Link
-                href="#contact"
-                className="inline-flex items-center justify-center rounded-sm bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
-              >
-                Free Consultation
-              </Link>
             </nav>
 
             {/* Mobile menu button */}
             <div className="lg:hidden flex items-center">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 text-gray-900"
+                className="p-2 text-white"
                 aria-label="Toggle menu"
               >
                 <Menu className="h-7 w-7" />
@@ -106,22 +97,14 @@ export default function Navbar() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-200">
+        <div className="lg:hidden bg-gradient-to-b from-[#001b33] to-[#002548] border-t border-gray-800">
           <div className="container mx-auto px-4 py-3">
             <nav className="flex flex-col space-y-1">
               <NavItem title="Home" href="/" className="px-0 py-2" />
-              <NavItem title="Practice Areas" href="#practice-areas" className="px-0 py-2" />
-              <NavItem title="Attorney" href="#attorney" className="px-0 py-2" />
-              <NavItem title="Success Cases" href="#success-cases" className="px-0 py-2" />
-              <NavItem title="Locations" href="#locations" className="px-0 py-2" />
-              <div className="pt-2">
-                <Link
-                  href="#contact"
-                  className="inline-flex w-full items-center justify-center rounded-sm bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
-                >
-                  Free Consultation
-                </Link>
-              </div>
+              <NavItem title="About Us" href="#" className="px-0 py-2" />
+              <NavItem title="Practice Areas" href="#" className="px-0 py-2" />
+              <NavItem title="Our Team" href="#" className="px-0 py-2" />
+              <NavItem title="Contact" href="#" className="px-0 py-2" />
             </nav>
           </div>
         </div>
