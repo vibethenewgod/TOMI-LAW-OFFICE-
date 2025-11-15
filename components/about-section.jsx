@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function AboutSection() {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white" data-aos="fade-up">
       <div className="container mx-auto">
         <div className="relative w-full bg-[#002548] text-white overflow-hidden about-section">
           {/* Decorative corner elements */}

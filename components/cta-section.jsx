@@ -5,7 +5,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["400", "500", "600", "700
 
 export default function CTASection() {
     return (
-        <section className="py-10 md:py-14 bg-[#d49e17]">
+        <section className="py-10 md:py-14 bg-[#d49e17]" data-aos="fade-up">
             <div className="container mx-auto px-4 md:px-8 lg:px-12 text-center">
                 <h2 className={`${poppins.className} text-xl md:text-2xl lg:text-3xl text-white mb-3 font-semibold uppercase`}>
                     GET THE INSIGHTS THAT MATTER
